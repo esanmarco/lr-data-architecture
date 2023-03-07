@@ -3,8 +3,10 @@ import { Routes, Route } from "react-router-dom";
 
 export default function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Dashboard />} />
-    </Routes>
+    <div className="prose w-full max-w-none p-8">
+      <Routes>
+        <Route path="/" element={<Dashboard />} />
+      </Routes>
+    </div>
   );
 }

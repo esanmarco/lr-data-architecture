@@ -22,14 +22,17 @@ export default function Dashboard() {
     <main>
       <h1>Dashboard</h1>
       <Suspense fallback={<BoardSkeletonLoader />}>
-        {columns?.map((column, i) => {
-          return (
-            <Column
-              key={`${column}-${i}`}
-              requests={requestsByStatus(column)}
-            />
-          );
-        })}
+        <div className="grid grid-cols-4 mt-8 gap-3">
+          {columns?.map((column, i) => {
+            return (
+              <Column
+                key={`${column}-${i}`}
+                type={column}
+                requests={requestsByStatus(column)}
+              />
+            );
+          })}
+        </div>
       </Suspense>
       <NewRequest />
       <RequestDetails />
