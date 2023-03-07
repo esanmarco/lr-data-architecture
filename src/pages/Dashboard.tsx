@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { Status, useGetStatusColumns } from "../api/board";
 import { useGetRequests } from "../api/requests";
-import Column from "../components/Column";
+import Column from "./components/Column";
 import NewRequest from "./modals/NewRequest";
 import RequestDetails from "./modals/RequestDetails";
 

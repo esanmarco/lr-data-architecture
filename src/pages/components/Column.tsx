@@ -1,4 +1,4 @@
-import { Request } from "../api/requests";
+import { Request } from "../../api/requests";
 
 export default function Column({ requests }: { requests: Request[] }) {
   return (
