@@ -8,8 +8,9 @@ import RequestDetails from "./modals/RequestDetails";
 const BoardSkeletonLoader = () => <div>Loading...</div>;
 
 export default function Dashboard() {
-  const { data: columns } = useGetStatusColumns();
-  const { data: requests } = useGetRequests();
+  const { data: columns, isLoading: isFetchingColumns } = useGetStatusColumns();
+  const { data: requests, isLoading: isFetchingRequests } = useGetRequests();
+  const isLoading = isFetchingColumns || isFetchingRequests;
 
   const requestsByStatus = (status: Status) => {
     return (
@@ -18,22 +19,24 @@ export default function Dashboard() {
     );
   };
 
+  if (isLoading) {
+    return <BoardSkeletonLoader />;
+  }
+
   return (
     <main>
       <h1>Dashboard</h1>
-      <Suspense fallback={<BoardSkeletonLoader />}>
-        <div className="grid grid-cols-4 mt-8 gap-3">
-          {columns?.map((column, i) => {
-            return (
-              <Column
-                key={`${column}-${i}`}
-                type={column}
-                requests={requestsByStatus(column)}
-              />
-            );
-          })}
-        </div>
-      </Suspense>
+      <div className="grid grid-cols-4 mt-8 gap-3">
+        {columns?.map((column, i) => {
+          return (
+            <Column
+              key={`${column}-${i}`}
+              type={column}
+              requests={requestsByStatus(column)}
+            />
+          );
+        })}
+      </div>
       <NewRequest />
       <RequestDetails />
     </main>
