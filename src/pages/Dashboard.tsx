@@ -12,7 +12,10 @@ export default function Dashboard() {
   const { data: requests } = useGetRequests();
 
   const requestsByStatus = (status: Status) => {
-    return requests?.filter((request) => request.status === status) ?? [];
+    return (
+      requests?.filter((request) => request.status === status.toLowerCase()) ??
+      []
+    );
   };
 
   return (
